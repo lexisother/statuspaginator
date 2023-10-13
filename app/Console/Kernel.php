@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // TODO: Write a Job that goes over all configured URLs and fetches version data
+        // $schedule->exec('echo "hiii" > test.txt')->everySecond();
     }
 
     /**
