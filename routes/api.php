@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/register', 'APIController@register');
-Route::post('/unregister', 'APIController@unregister');
+
+Route::middleware([EnsureToken::class])->group(function() {
+    Route::post('/register', 'APIController@register');
+    Route::post('/unregister', 'APIController@unregister');
+});
