@@ -26,4 +26,13 @@ class APIController extends Controller
             'ok' => true
         ]);
     }
+
+    public function unregister(Request $request)
+    {
+        Site::where('url', $request->get('baseUrl'))->delete();
+
+        return response()->json([
+            'ok' => true
+        ]);
+    }
 }

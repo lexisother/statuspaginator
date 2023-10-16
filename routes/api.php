@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/register', 'APIController@register');
+Route::post('/unregister', 'APIController@unregister');
