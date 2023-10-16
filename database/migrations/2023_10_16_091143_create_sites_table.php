@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->text('url');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }
