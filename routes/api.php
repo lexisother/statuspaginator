@@ -13,9 +13,4 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::/*middleware('auth:sanctum')->*/post('/register', function (Request $request) {
-    return response()->json([
-        'ok' => true
-    ]);
-});
+Route::post('/register', 'APIController@register');
