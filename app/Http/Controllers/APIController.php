@@ -17,11 +17,13 @@ class APIController extends Controller
 
     public function register(Request $request)
     {
+        // HACK, I guess? For some reason inlining `name` and `timezone` while they're non-nullable breaks things.
+        // Very weird.
         $site = Site::firstOrCreate([
-            'name' => $request->get('name'),
             'url' => $request->get('baseUrl'),
-            'timezone' => $request->get('timezone'),
         ]);
+        $site->name = $request->get('name');
+        $site->timezone = $request->get('timezone');
         $site->save();
 
         return response()->json([
