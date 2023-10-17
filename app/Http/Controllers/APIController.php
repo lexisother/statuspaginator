@@ -18,7 +18,9 @@ class APIController extends Controller
     public function register(Request $request)
     {
         $site = Site::firstOrCreate([
-            'url' => $request->get('baseUrl')
+            'name' => $request->get('name'),
+            'url' => $request->get('baseUrl'),
+            'timezone' => $request->get('timezone'),
         ]);
         $site->save();
 
