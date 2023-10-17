@@ -34,8 +34,7 @@ class PingCraftInstance implements ShouldQueue
         $site = $this->site;
 
         $res = Http::get($site->url . '/actions/_statuspaginator/status')->json();
-        $data = json_encode($res);
-        $site->data = $data;
+        $site->data = $res;
 
         $site->save();
     }
