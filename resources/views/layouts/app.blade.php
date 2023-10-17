@@ -28,7 +28,10 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" class="text-card font-mono flex flex-col min-h-screen">
+        <div class="bg-gradient-to-b from-gradt to-gradb fixed left-0 top-0 h-[120vh] md:h-[100vh] w-[100vw] -z-10"></div>
+        <x-header />
+
         @if (Config::get('app.debug') == 1)
             <div class="debug-container">
                 <code>@yield('debugcontent')</code>
@@ -36,6 +39,12 @@
         @endif
 
         @yield('content')
+
+        <div class="flex-1"></div>
+
+        <div class="text-right text-subtitle italic m-4">
+            <p class="inline">Made with &lt;3 by <a class="underline" href="https://brik.digital">Brik.digital</a></p>
+        </div>
     </div>
 
     @stack('body-js')
