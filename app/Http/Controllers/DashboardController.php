@@ -12,6 +12,7 @@ class DashboardController extends Controller
     {
         $sites = Site::all();
         $sites->map(function (Site $site) {
+            if (!$site->data) return;
             $cmsUpdates = $site->data['craft']['updates']['cms']['releases'];
             $updAvail = sizeof($cmsUpdates) > 0;
 
