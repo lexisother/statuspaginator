@@ -4,18 +4,25 @@
     <div class="grid grid-cols-1 gap-4 mx-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         @foreach($sites as $site)
             @if($site->data)
-                <div class="bg-cardbg border-black border shadow-md p-2 min-h-[9.5rem] grid">
+                <div class="{{ $site->criticalUpdate ? 'bg-cardbgcrit' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid">
                     <div class="flex flex-col row-start-1 col-start-1">
-                        <div class="text-lg">{{ $site->name }}</div>
-                        <div class="text-sm">{{ $site->url }}</div>
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <div class="text-lg">{{ $site->name }}</div>
 
-                        @if ($site->updateAvailable)
-                            <div class="text-sm text-yellow-300">Update available!</div>
-                        @endif
-                        @if ($site->criticalUpdate)
-                            <div class="text-sm text-red-500">Critical update available!</div>
-                        @endif
-
+                                @if ($site->updateAvailable)
+                                    <div class="text-sm text-yellow-300">Update available!</div>
+                                @endif
+                                @if ($site->criticalUpdate)
+                                    <div class="text-sm text-red-500">Critical update available!</div>
+                                @endif
+                            </div>
+                            @if ($site->data['meta']['rebrand']['icon'])
+                                <div>
+                                    <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="h-12" />
+                                </div>
+                            @endif
+                        </div>
 
                         <div class="flex-1"></div>
 
@@ -34,3 +41,4 @@
         @endforeach
     </div>
 @endsection
+
