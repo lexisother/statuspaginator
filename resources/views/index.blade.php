@@ -20,7 +20,13 @@
                         <div class="flex-1"></div>
 
                         <div class="bg-cardbgalt h-12 -m-2 mt-4 text-sm flex items-center p-2">
-                            <p class="inline">Craft {{ $site->data['craft']['version'] }}</p>
+                            Craft {{ $site->data['craft']['version'] }} ({{ $site->data['craft']['edition'] }})
+                            <div class="flex-1"></div>
+                            <a
+                                class="bg-blurple py-1 px-6 hover:cursor-pointer"
+                                href="{{ $site->data['meta']['cpurl'] }}"
+                                target="_blank"
+                            >Visit</a>
                         </div>
                     </div>
                 </div>
@@ -28,4 +34,3 @@
         @endforeach
     </div>
 @endsection
-
