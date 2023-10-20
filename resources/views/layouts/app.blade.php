@@ -21,6 +21,7 @@
     @yield('head')
 
     @stack('css')
+    @livewireStyles
 
     @stack('head-js')
 
@@ -48,4 +49,5 @@
     </div>
 
     @stack('body-js')
+    @livewireScripts
 </body>
