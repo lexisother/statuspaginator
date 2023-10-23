@@ -3,9 +3,9 @@
 @section('content')
     <div class="bg-cardbg border-black border shadow-md m-4 min-h-[9.5rem] grid">
         {{-- Header --}}
-        <div class="m-10 text-center flex flex-row justify-between items-center">
+        <div class="m-10 text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
             <div class="flex flex-row gap-4">
-                <h1 class="text-5xl text-hero font-light">{{ $site->name }}</h1>
+                <h1 class="text-lg text-hero font-light self-center md:text-5xl">{{ $site->name }}</h1>
                 <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
             </div>
             <div class="flex flex-col gap-2">
