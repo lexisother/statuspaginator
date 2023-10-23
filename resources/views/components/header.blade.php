@@ -2,6 +2,6 @@
     <div></div>
     <div class="flex items-center">
         <img class="inline h-6 mr-2 rounded" src="https://avatars.githubusercontent.com/u/22369139?s=200&v=4" />
-        <p class="inline">Statuspaginator</p>
+        <a href="/" class="inline">Statuspaginator</a>
     </div>
 </div>
