@@ -11,8 +11,15 @@ class DashboardController extends Controller
     public function index()
     {
         return view('index');
+    }
 
+    public function showSite(int $id) {
+        /** @var Site $site */
+        $site = Site::where('id', $id)->first();
+        if (!$site) return response('Not found', 404);
 
+        $site->setUpdates();
 
+        return view('site', ['site' => $site]);
     }
 }
