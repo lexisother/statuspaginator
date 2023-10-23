@@ -10,23 +10,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $sites = Site::all();
-        $sites->map(function (Site $site) {
-            if (!$site->data) return;
-            $cmsUpdates = $site->data['craft']['updates']['cms']['releases'];
-            $updAvail = sizeof($cmsUpdates) > 0;
+        return view('index');
 
-            if ($updAvail) {
-                $site->updateAvailable = true;
 
-                Arr::map($cmsUpdates, function (array $update) use ($site) {
-                    if ($update['critical']) {
-                        $site->criticalUpdate = true;
-                    }
-                });
-            }
-        });
 
-        return view('index', ['sites' => $sites]);
     }
 }

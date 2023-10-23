@@ -11,8 +11,13 @@ class SiteListing extends Component
 
     public function render()
     {
+        $sites = Site::where('name', 'like', "%{$this->search}%")->get();
+        $sites->map(function (Site $site) {
+            $site->setUpdates();
+        });
+
         return view('livewire.site-listing', [
-            'sites' => Site::where('name', 'like', "%{$this->search}%")->get()
+            'sites' => $sites
         ]);
     }
 }
