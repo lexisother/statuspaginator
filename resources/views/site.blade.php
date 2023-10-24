@@ -50,7 +50,7 @@
                     @endforeach
                     @foreach($site->data['craft']['updates']['plugins'] as $plugin)
                         @if(count($plugin['releases']) > 0)
-                            <h2 class="text-3xl mb-1">{{ $plugin->name }}</h2>
+                            <h2 class="text-3xl mb-1">{{ $plugin['name'] }}</h2>
                             @foreach($plugin['releases'] as $update)
                                 <div
                                     class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
