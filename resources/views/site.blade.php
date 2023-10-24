@@ -49,21 +49,23 @@
                         </div>
                     @endforeach
                     @foreach($site->data['craft']['updates']['plugins'] as $plugin)
-                        <h2 class="text-3xl mb-1">{{ $plugin->name }}</h2>
-                        @foreach($plugin['releases'] as $update)
-                            <div
-                                class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
-                                x-data="{ opened: false }"
-                            >
-                                <div class="flex flex-row gap-4 cursor-pointer" @click="opened = !opened">
-                                    <h2 class="text-xl">{{ $update['version'] }}</h2>
-                                    <h2 class="text-xl text-subtitle">{{ Date::make($update['date'])->toDateString() }}</h2>
+                        @if(count($plugin['releases']) > 0)
+                            <h2 class="text-3xl mb-1">{{ $plugin->name }}</h2>
+                            @foreach($plugin['releases'] as $update)
+                                <div
+                                    class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
+                                    x-data="{ opened: false }"
+                                >
+                                    <div class="flex flex-row gap-4 cursor-pointer" @click="opened = !opened">
+                                        <h2 class="text-xl">{{ $update['version'] }}</h2>
+                                        <h2 class="text-xl text-subtitle">{{ Date::make($update['date'])->toDateString() }}</h2>
+                                    </div>
+                                    <div class="updateContainer ml-8 pt-2" x-cloak x-show="opened">
+                                        {!! $update['notes'] !!}
+                                    </div>
                                 </div>
-                                <div class="updateContainer ml-8 pt-2" x-cloak x-show="opened">
-                                    {!! $update['notes'] !!}
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @endif
                     @endforeach
                 </div>
             @else
