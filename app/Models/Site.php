@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
 class Site extends Model
 {
@@ -21,17 +20,8 @@ class Site extends Model
 
     public function setUpdates() {
         if (!$this->data) return;
-        $cmsUpdates = $this->data['craft']['updates']['cms']['releases'];
-        $updAvail = sizeof($cmsUpdates) > 0;
-
-        if ($updAvail) {
-            $this->updateAvailable = true;
-
-            Arr::map($cmsUpdates, function (array $update) {
-                if ($update['critical']) {
-                    $this->criticalUpdate = true;
-                }
-            });
-        }
+        if ($this->data['craft']['updates']['total'] > 0) $this->updateAvailable = true;
+        if ($this->data['craft']['updates']['critical']) $this->criticalUpdate = true;
+        $this->data['craft']['updates'] = $this->data['craft']['updates']['updates'];
     }
 }
