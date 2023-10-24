@@ -5,7 +5,7 @@
         {{-- Header --}}
         <div class="m-10 text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
             <div class="flex flex-row gap-4">
-                <h1 class="text-lg text-hero font-light self-center md:text-5xl">{{ $site->name }}</h1>
+                <h1 class="text-lg font-light self-center md:text-5xl">{{ $site->name }}</h1>
                 <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
             </div>
             <div class="flex flex-col gap-2">
@@ -24,15 +24,16 @@
 
         {{-- Metadata --}}
         <div class="flex flex-col gap-2 mx-10 mb-10">
-            <h1 class="text-3xl mb-2">Info</h1>
+            <h1 class="text-4xl mb-2">Info</h1>
             <p>Timezone: {{ $site->timezone }}</p>
         </div>
 
         {{-- Updates --}}
         <div class="flex flex-col mx-10 mb-10">
-            <h1 class="text-3xl mb-2">Updates</h1>
+            <h1 class="text-4xl mb-2">Updates</h1>
             @if($site->updateAvailable)
                 <div class="flex flex-col gap-4">
+                    <h2 class="text-3xl mb-1">Craft CMS</h2>
                     @foreach($site->data['craft']['updates']['cms']['releases'] as $update)
                         <div
                             class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
@@ -46,6 +47,23 @@
                                 {!! $update['notes'] !!}
                             </div>
                         </div>
+                    @endforeach
+                    @foreach($site->data['craft']['updates']['plugins'] as $plugin)
+                        <h2 class="text-3xl mb-1">{{ $plugin->name }}</h2>
+                        @foreach($plugin['releases'] as $update)
+                            <div
+                                class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
+                                x-data="{ opened: false }"
+                            >
+                                <div class="flex flex-row gap-4 cursor-pointer" @click="opened = !opened">
+                                    <h2 class="text-xl">{{ $update['version'] }}</h2>
+                                    <h2 class="text-xl text-subtitle">{{ Date::make($update['date'])->toDateString() }}</h2>
+                                </div>
+                                <div class="updateContainer ml-8 pt-2" x-cloak x-show="opened">
+                                    {!! $update['notes'] !!}
+                                </div>
+                            </div>
+                        @endforeach
                     @endforeach
                 </div>
             @else
