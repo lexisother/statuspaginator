@@ -15,6 +15,8 @@ class OhDearData extends Component
     {
         $sites = $ohDear->getSites();
         $this->data = collect($sites)->where('url', $this->site)->first();
+        if ($this->data)
+            $ohDear->fetchChecks($this->data);
     }
 
     public function placeholder(): string

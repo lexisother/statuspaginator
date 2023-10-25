@@ -37,4 +37,23 @@ class OhDearService {
     {
         return $this->sites;
     }
+
+    /**
+     * Fetch some common check data.
+     *
+     * @param Site $site
+     * @return array
+     */
+    public function fetchChecks(Site $site): array
+    {
+        $client = $this->client;
+        $id = $site->id;
+        $results = [];
+
+        $start = Date::now('Europe/Amsterdam')->subMonth()->format('YmdHis');
+        $end = Date::now('Europe/Amsterdam')->format('YmdHis');
+        $results['uptime'] = $client->uptime($id, $start, $end, 'hour');
+
+        return $results;
+    }
 }
