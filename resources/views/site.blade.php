@@ -9,8 +9,9 @@
                 <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
             </div>
             <div class="flex flex-col gap-2">
-                <x-button :to="$site->data['meta']['cpurl']">Control Panel</x-button>
-                <x-button :to="$site->url">Public Site</x-button>
+                <x-button :to="$site->data['meta']['cpurl']" newtab>Control Panel</x-button>
+                <x-button :to="$site->url" newtab>Public Site</x-button>
+                <x-button to="/sites/{{ $site->id }}/plugins">Plugin List</x-button>
             </div>
         </div>
 
