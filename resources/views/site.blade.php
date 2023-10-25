@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-cardbg border-black border shadow-md m-4 min-h-[9.5rem] grid">
+    <x-pagecard>
         {{-- Header --}}
         <div class="m-10 text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
             <div class="flex flex-row gap-4">
@@ -44,5 +44,5 @@
                 <p>All up-to-date!</p>
             @endif
         </div>
-    </div>
+    </x-pagecard>
 @endsection
