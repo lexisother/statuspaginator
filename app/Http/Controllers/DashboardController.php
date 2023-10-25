@@ -21,4 +21,13 @@ class DashboardController extends Controller
 
         return view('site', ['site' => $site]);
     }
+
+    public function showPlugins(int $id) {
+        $site = Site::where('id', $id)->first();
+        if (!$site) return response('Not found', 404);
+
+        $plugins = collect($site->data['plugins'])->filter(fn ($v, $k) => !str_starts_with($k, '_'));
+
+        return view('plugins', ['plugins' => $plugins]);
+    }
 }
