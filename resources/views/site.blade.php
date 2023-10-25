@@ -9,16 +9,8 @@
                 <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
             </div>
             <div class="flex flex-col gap-2">
-                <a
-                    class="bg-blurple py-1 px-6 hover:cursor-pointer"
-                    href="{{ $site->data['meta']['cpurl'] }}"
-                    target="_blank"
-                >Control Panel</a>
-                <a
-                    class="bg-blurple py-1 px-6 hover:cursor-pointer"
-                    href="{{ $site->url }}"
-                    target="_blank"
-                >Public Site</a>
+                <x-button :to="$site->data['meta']['cpurl']">Control Panel</x-button>
+                <x-button :to="$site->url">Public Site</x-button>
             </div>
         </div>
 
@@ -35,35 +27,13 @@
                 <div class="flex flex-col gap-4">
                     <h2 class="text-3xl mb-1">Craft CMS</h2>
                     @foreach($site->data['craft']['updates']['cms']['releases'] as $update)
-                        <div
-                            class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
-                            x-data="{ opened: false }"
-                        >
-                            <div class="flex flex-row gap-4 cursor-pointer" @click="opened = !opened">
-                                <h2 class="text-xl">{{ $update['version'] }}</h2>
-                                <h2 class="text-xl text-subtitle">{{ Date::make($update['date'])->toDateString() }}</h2>
-                            </div>
-                            <div class="updateContainer ml-8 pt-2" x-cloak x-show="opened">
-                                {!! $update['notes'] !!}
-                            </div>
-                        </div>
+                        <x-update :update="$update" />
                     @endforeach
                     @foreach($site->data['craft']['updates']['plugins'] as $plugin)
                         @if(count($plugin['releases']) > 0)
                             <h2 class="text-3xl mb-1">{{ $plugin['name'] }}</h2>
                             @foreach($plugin['releases'] as $update)
-                                <div
-                                    class="{{ $update['critical'] ? 'bg-cardbgcrit' : 'bg-cardbgalt' }} border-black border p-4"
-                                    x-data="{ opened: false }"
-                                >
-                                    <div class="flex flex-row gap-4 cursor-pointer" @click="opened = !opened">
-                                        <h2 class="text-xl">{{ $update['version'] }}</h2>
-                                        <h2 class="text-xl text-subtitle">{{ Date::make($update['date'])->toDateString() }}</h2>
-                                    </div>
-                                    <div class="updateContainer ml-8 pt-2" x-cloak x-show="opened">
-                                        {!! $update['notes'] !!}
-                                    </div>
-                                </div>
+                                <x-update :update="$update" />
                             @endforeach
                         @endif
                     @endforeach
