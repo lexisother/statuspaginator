@@ -14,6 +14,8 @@
             </div>
         </div>
 
+        {{-- <livewire:oh-dear-data lazy :site="$site->url" /> --}}
+
         {{-- Metadata --}}
         <div class="flex flex-col gap-2 mx-10 mb-10">
             <h1 class="text-4xl mb-2">Info</h1>
