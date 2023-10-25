@@ -14,7 +14,6 @@ class DashboardController extends Controller
     }
 
     public function showSite(int $id) {
-        /** @var Site $site */
         $site = Site::where('id', $id)->first();
         if (!$site) return response('Not found', 404);
 

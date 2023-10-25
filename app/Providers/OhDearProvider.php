@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\OhDearService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use OhDear\PhpSdk\OhDear;
 
 class OhDearProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -14,8 +14,8 @@ class OhDearProvider extends ServiceProvider implements DeferrableProvider
     public function register(): void
     {
         $token = env('OHDEAR_TOKEN');
-        $ohDear = new OhDear($token);
-        $this->app->instance(OhDear::class, $ohDear);
+        $ohDear = new OhDearService($token);
+        $this->app->instance(OhDearService::class, $ohDear);
     }
 
     /**
@@ -25,6 +25,6 @@ class OhDearProvider extends ServiceProvider implements DeferrableProvider
      */
     public function provides(): array
     {
-        return [OhDear::class];
+        return [OhDearService::class];
     }
 }
