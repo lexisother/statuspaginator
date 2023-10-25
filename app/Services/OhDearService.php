@@ -11,8 +11,9 @@ class OhDearService {
     /** @var Site[] $sites */
     private array $sites;
 
-    public function __construct(string $token)
+    public function __construct(string $token = null)
     {
+        if (!$token) return;
         $this->client = new OhDear($token);
 
         $this->fetchSites();
