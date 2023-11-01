@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'DashboardController@index');
 Route::get('/sites/{id}', 'DashboardController@showSite');
 Route::get('/sites/{id}/plugins', 'DashboardController@showPlugins');
+
+Route::middleware('auth.basic')
+    ->prefix('/admin')
+    ->group(function () {
+        Route::redirect('/', '/admin/dashboard');
+
+        Route::get('/dashboard', 'AdminController@showDashboard');
+    });

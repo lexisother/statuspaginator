@@ -4,4 +4,11 @@
         <img class="inline h-6 mr-2 rounded" src="https://avatars.githubusercontent.com/u/22369139?s=200&v=4" />
         <a href="/" class="inline">Statuspaginator</a>
     </div>
+    <div class="flex items-center gap-4">
+        @guest
+            <a href="/login" class="inline">Login</a>
+        @else
+            <p class="inline"></p>
+        @endif
+    </div>
 </div>
