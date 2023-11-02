@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-pagecard>
+    <x-pagecard class="flex flex-col gap-10">
         {{-- Header --}}
         <div class="text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
             <div class="flex flex-row gap-4">
