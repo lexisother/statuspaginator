@@ -3,7 +3,7 @@
 @section('content')
     <x-pagecard>
         {{-- Header --}}
-        <div class="m-10 text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
+        <div class="text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
             <div class="flex flex-row gap-4">
                 <h1 class="text-lg font-light self-center md:text-5xl">{{ $site->name }}</h1>
                 <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
@@ -18,13 +18,13 @@
         {{-- <livewire:oh-dear-data lazy :site="$site->url" /> --}}
 
         {{-- Metadata --}}
-        <div class="flex flex-col gap-2 mx-10 mb-10">
+        <div class="flex flex-col gap-2">
             <h1 class="text-4xl mb-2">Info</h1>
             <p>Timezone: {{ $site->timezone }}</p>
         </div>
 
         {{-- Updates --}}
-        <div class="flex flex-col mx-10 mb-10">
+        <div class="flex flex-col">
             <h1 class="text-4xl mb-2">Updates</h1>
             @if($site->updateAvailable)
                 <div class="flex flex-col gap-4">
