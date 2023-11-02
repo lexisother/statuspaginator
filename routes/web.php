@@ -23,4 +23,6 @@ Route::middleware('auth.basic')
         Route::redirect('/', '/admin/users');
 
         Route::get('/users', 'AdminController@showUsers')->name('admin.users');
+
+        Route::post('/users/create', 'AdminController@createUser');
     });
