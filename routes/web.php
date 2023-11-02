@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ Route::get('/', 'DashboardController@index');
 Route::get('/sites/{id}', 'DashboardController@showSite');
 Route::get('/sites/{id}/plugins', 'DashboardController@showPlugins');
 
-Route::middleware('auth.basic')
+Route::middleware(['auth.basic', EnsureAdmin::class])
     ->prefix('/admin')
     ->group(function () {
         Route::redirect('/', '/admin/users');
