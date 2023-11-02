@@ -20,7 +20,7 @@ Route::get('/sites/{id}/plugins', 'DashboardController@showPlugins');
 Route::middleware('auth.basic')
     ->prefix('/admin')
     ->group(function () {
-        Route::redirect('/', '/admin/dashboard');
+        Route::redirect('/', '/admin/users');
 
-        Route::get('/dashboard', 'AdminController@showDashboard');
+        Route::get('/users', 'AdminController@showUsers')->name('admin.users');
     });
