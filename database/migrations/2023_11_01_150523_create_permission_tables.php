@@ -116,8 +116,6 @@ return new class extends Migration
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
             ->forget(config('permission.cache.key'));
-
-        \Spatie\Permission\Models\Role::create(['name' => 'admin']);
     }
 
     /**
@@ -136,6 +134,5 @@ return new class extends Migration
         Schema::drop($tableNames['model_has_permissions']);
         Schema::drop($tableNames['roles']);
         Schema::drop($tableNames['permissions']);
-        \Spatie\Permission\Models\Role::delete(['name' => 'admin']);
     }
 };
