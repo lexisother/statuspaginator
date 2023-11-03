@@ -14,7 +14,7 @@ class AdminController extends \Illuminate\Routing\Controller
         $usersByRoles = collect();
         Role::all()->map(function($role) use ($usersByRoles) {
             $users = $role->users()->get();
-            $usersByRoles->put($role->name,  $users);
+            $usersByRoles->put($role->name, $users);
         });
 
         return view('admin.users', ['roles' => $usersByRoles]);
