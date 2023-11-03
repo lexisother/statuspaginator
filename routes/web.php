@@ -24,6 +24,8 @@ Route::middleware(['auth.basic', EnsureAdmin::class])
         Route::redirect('/', '/admin/users');
 
         Route::get('/users', 'AdminController@showUsers')->name('admin.users');
+        Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
 
         Route::post('/users/create', 'AdminController@createUser');
+        Route::post('/roles/create', 'AdminController@createRole');
     });

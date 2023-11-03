@@ -20,6 +20,16 @@ class AdminController extends \Illuminate\Routing\Controller
         return view('admin.users', ['roles' => $usersByRoles]);
     }
 
+    public function showRoles() {
+        $rolesWithAmounts = collect();
+        Role::all()->map(function($role) use ($rolesWithAmounts) {
+            $amount = $role->users()->count();
+            $rolesWithAmounts->put($role->name, $amount);
+        });
+
+        return view('admin.roles', ['roles' => $rolesWithAmounts]);
+    }
+
     public function createUser(Request $request) {
         $name = $request->get('name');
         $email = $request->get('email');
@@ -36,5 +46,15 @@ class AdminController extends \Illuminate\Routing\Controller
         $user->assignRole($role);
 
         return redirect('/admin/users');
+    }
+
+    public function createRole(Request $request) {
+        $name = $request->get('name');
+
+        Role::create([
+            'name' => $name
+        ]);
+
+        return redirect('/admin/roles');
     }
 }
