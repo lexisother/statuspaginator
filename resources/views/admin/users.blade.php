@@ -14,11 +14,15 @@
             @foreach($roles as $role => $users)
                 <div>
                     <h1 class="text-2xl pb-2">{{ Str::title($role) }}</h1>
-                    <div class="grid grid-cols-1 gap-4 mx-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-                        @foreach($users as $user)
-                            <x-admin.user :user="$user" />
-                        @endforeach
-                    </div>
+                    @if($users->isEmpty())
+                        <p class="italic">No users in this role...</p>
+                    @else
+                        <div class="grid grid-cols-1 gap-4 mx-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                            @foreach($users as $user)
+                                <x-admin.user :user="$user" />
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>
