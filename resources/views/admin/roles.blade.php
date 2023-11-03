@@ -13,7 +13,7 @@
 
         <div>
             @foreach($roles as $role => $amount)
-                <p>{{ Str::title($role) }}: {{ $amount }}</p>
+                <p>{{ $role }}: {{ $amount }}</p>
             @endforeach
         </div>
     </div>

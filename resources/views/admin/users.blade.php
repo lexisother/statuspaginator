@@ -75,7 +75,7 @@
                                 <label for="role" class="block text-sm text-gray-700 capitalize">Role</label>
                                 <select id="role" name="role" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                     @foreach ($roles as $role => $_)
-                                        <option value="{{ $role }}">{{ Str::title($role) }}</option>
+                                        <option value="{{ $role }}">{{ $role }}</option>
                                     @endforeach
                                 </select>
                             </div>
