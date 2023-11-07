@@ -19,6 +19,14 @@ class AdminController extends \Illuminate\Routing\Controller
         return view('admin.users', ['roles' => $usersByRoles]);
     }
 
+    public function showUser(int $id) {
+        if ($user = User::where('id', $id)->first()) {
+            return view('admin.edit-user', ['user' => $user]);
+        } else {
+            abort(404);
+        }
+    }
+
     public function showRoles() {
         $rolesWithAmounts = collect();
         Role::all()->map(function($role) use ($rolesWithAmounts) {
