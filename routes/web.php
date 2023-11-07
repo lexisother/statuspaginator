@@ -26,6 +26,7 @@ Route::middleware(['auth.basic', EnsureAdmin::class])
         Route::get('/users', 'AdminController@showUsers')->name('admin.users');
         Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
 
-        Route::post('/users/create', 'AdminController@createUser');
-        Route::post('/roles/create', 'AdminController@createRole');
+        Route::post('/users/create', 'UserController@create');
+
+        Route::post('/roles/create', 'RoleController@create');
     });
