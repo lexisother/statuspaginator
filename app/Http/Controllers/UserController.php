@@ -26,4 +26,27 @@ class UserController extends \Illuminate\Routing\Controller
 
         return redirect('/admin/users');
     }
+
+    public function edit(Request $request, int $id) {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        if ($pass = $request->get('password'))
+            $user->password = Hash::make($pass);
+
+        $user->save();
+
+        return redirect("/admin/users/{$user->id}");
+    }
+
+    public function delete(Request $request, int $id) {
+        User::findOrFail($id)->delete();
+        return redirect('/admin/users');
+    }
 }

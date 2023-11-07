@@ -27,6 +27,10 @@ Route::middleware(['auth.basic', EnsureAdmin::class])
         Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
 
         Route::post('/users/create', 'UserController@create');
+        Route::patch('/users/edit/{id}', 'UserController@edit');
+        Route::post('/users/delete/{id}', 'UserController@delete');
 
         Route::post('/roles/create', 'RoleController@create');
+        Route::post('/roles/edit', 'RoleController@edit');
+        Route::post('/roles/delete', 'RoleController@delete');
     });

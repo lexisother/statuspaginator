@@ -16,4 +16,12 @@ class RoleController extends \Illuminate\Routing\Controller
 
         return redirect('/admin/roles');
     }
+
+    public function edit(Request $request) {
+        /* TODO */
+    }
+
+    public function delete(Request $request) {
+        /* TODO */
+    }
 }
