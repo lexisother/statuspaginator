@@ -33,12 +33,15 @@ class UserController extends \Illuminate\Routing\Controller
             'email' => 'required'
         ]);
 
+        /** @var User $user */
         $user = User::findOrFail($id);
 
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         if ($pass = $request->get('password'))
             $user->password = Hash::make($pass);
+        $user->removeRole($user->roles()->first()->name);
+        $user->assignRole($request->get('role'));
 
         $user->save();
 

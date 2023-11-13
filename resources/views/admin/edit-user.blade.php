@@ -26,6 +26,13 @@
                 name="password"
                 class="h-14 p-4 flex-1 md:flex-none bg-cardbg border border-black shadow-md" />
         </div>
+        <div class="flex flex-col gap-2">
+            <select id="role" name="role" class="h-14 p-4 flex-1 md:flex-none bg-cardbg border border-black shadow-md">
+                @foreach ($roles as $role)
+                    <option value="{{ $role->name }}" {!! $role->name === $user->role && 'selected' !!}>{{ $role->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
         <input type="submit" value="Save" class="flex items-center justify-center space-x-2 bg-blurple py-1 px-6 hover:cursor-pointer mb-4" />
     </form>

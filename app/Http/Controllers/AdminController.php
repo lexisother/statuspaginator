@@ -22,7 +22,7 @@ class AdminController extends \Illuminate\Routing\Controller
 
     public function showUser(int $id) {
         if ($user = User::where('id', $id)->first()) {
-            return view('admin.edit-user', ['user' => $user]);
+            return view('admin.edit-user', ['user' => $user, 'roles' => Role::all()]);
         } else {
             abort(404);
         }
