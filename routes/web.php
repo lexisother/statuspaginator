@@ -27,6 +27,7 @@ Route::middleware(['auth.basic', EnsureAdmin::class])
         Route::get('/users/{id}', 'AdminController@showUser')->name('admin.users');
         Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
 
+        Route::get('/sites', 'AdminController@showSites')->name('admin.sites');
         Route::post('/users/create', 'UserController@create');
         Route::patch('/users/edit/{id}', 'UserController@edit');
         Route::post('/users/delete/{id}', 'UserController@delete');

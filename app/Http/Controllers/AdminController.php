@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Site;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,5 +36,9 @@ class AdminController extends \Illuminate\Routing\Controller
         });
 
         return view('admin.roles', ['roles' => $rolesWithAmounts]);
+    }
+
+    public function showSites() {
+        return view('admin.sites');
     }
 }
