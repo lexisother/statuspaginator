@@ -20,7 +20,7 @@ class SiteController extends \Illuminate\Routing\Controller
         if ($site) return view('admin.create-site', ['exists' => true]);
 
         $site = new Site(['url' => $url]);
-        // $site->token = $token;
+        $site->token = $token;
         $site->save();
 
         return view('admin.create-site', ['token' => $token]);
