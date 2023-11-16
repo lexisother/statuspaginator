@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Site;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +18,9 @@ class EnsureToken
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->get('token');
-        if ($token !== env('STATUSPAGINATOR_TOKEN')) {
-            return response('Incorrect token', 403);
-        }
+        $site = Site::where('token', $request->get('token'))->first();
+
+        if (!$site) return response('Incorrect token', 403);
 
         return $next($request);
     }
