@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Site extends Model
 {
@@ -17,6 +18,10 @@ class Site extends Model
     protected $casts = [
         'data' => AsArrayObject::class
     ];
+
+    public function users(): HasMany {
+        return $this->hasMany(User::class);
+    }
 
     public function setUpdates() {
         if (!$this->data) return;
