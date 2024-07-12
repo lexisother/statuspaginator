@@ -14,8 +14,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware([EnsureToken::class])->group(function() {
-    Route::post('/register', 'APIController@register');
-    Route::post('/unregister', 'APIController@unregister');
-});

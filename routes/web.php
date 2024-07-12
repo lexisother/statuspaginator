@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureAdmin;
+use App\Http\Middleware\EnsureToken;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +40,5 @@ Route::middleware(['auth.basic', EnsureAdmin::class])
         Route::post('/roles/delete', 'RoleController@delete');
 
         Route::post('/sites/create', 'SiteController@create');
+        Route::post('/sites/register', 'SiteController@register')->middleware([EnsureToken::class]);
     });
