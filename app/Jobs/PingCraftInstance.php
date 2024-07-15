@@ -34,7 +34,7 @@ class PingCraftInstance implements ShouldQueue
         $site = $this->site;
 
         try {
-            $res = Http::get($site->url . '/actions/_statuspaginator/status')->json();
+            $res = Http::get($site->url . '/actions/statuspaginator/status')->json();
         } catch(\Exception $e) {
             $this->fail($e);
             return;
