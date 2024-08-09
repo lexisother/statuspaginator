@@ -10,9 +10,7 @@
 
     <div class="grid grid-cols-1 gap-4 mx-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         @foreach($sites as $site)
-            @if($site->data)
-                <x-site-card :site="$site" />
-            @endif
+            <x-site-card :site="$site" />
         @endforeach
     </div>
 </div>
