@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureAdmin;
+use App\Http\Middleware\EnsureAuthed;
 use App\Http\Middleware\EnsureToken;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login', 'LoginController@showLogin');
+Route::post('/login', 'LoginController@handleLogin');
 
-Route::middleware(['auth.basic', EnsureAdmin::class])
+Route::middleware([EnsureAuthed::class, EnsureAdmin::class])
     ->group(function () {
         Route::get('/', 'DashboardController@index');
         Route::get('/sites/{id}', 'DashboardController@showSite');
