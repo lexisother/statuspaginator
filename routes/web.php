@@ -15,30 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'DashboardController@index');
-Route::get('/sites/{id}', 'DashboardController@showSite');
-Route::get('/sites/{id}/plugins', 'DashboardController@showPlugins');
 
 Route::middleware(['auth.basic', EnsureAdmin::class])
-    ->prefix('/admin')
     ->group(function () {
-        Route::redirect('/', '/admin/users');
+        Route::get('/', 'DashboardController@index');
+        Route::get('/sites/{id}', 'DashboardController@showSite');
+        Route::get('/sites/{id}/plugins', 'DashboardController@showPlugins');
 
-        Route::get('/users', 'AdminController@showUsers')->name('admin.users');
-        Route::get('/users/{id}', 'AdminController@showUser')->name('admin.users');
-        Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
+        Route::prefix('/admin')
+            ->group(function () {
+                Route::redirect('/', '/admin/users');
 
-        Route::get('/sites', 'AdminController@showSites')->name('admin.sites');
-        Route::get('/sites/create', 'SiteController@showCreate')->name('admin.sites');
+                Route::get('/users', 'AdminController@showUsers')->name('admin.users');
+                Route::get('/users/{id}', 'AdminController@showUser')->name('admin.users');
+                Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
 
-        Route::post('/users/create', 'UserController@create');
-        Route::patch('/users/edit/{id}', 'UserController@edit');
-        Route::post('/users/delete/{id}', 'UserController@delete');
+                Route::get('/sites', 'AdminController@showSites')->name('admin.sites');
+                Route::get('/sites/create', 'SiteController@showCreate')->name('admin.sites');
 
-        Route::post('/roles/create', 'RoleController@create');
-        Route::post('/roles/edit', 'RoleController@edit');
-        Route::post('/roles/delete', 'RoleController@delete');
+                Route::post('/users/create', 'UserController@create');
+                Route::patch('/users/edit/{id}', 'UserController@edit');
+                Route::post('/users/delete/{id}', 'UserController@delete');
 
-        Route::post('/sites/create', 'SiteController@create');
-        Route::post('/sites/register', 'SiteController@register')->middleware([EnsureToken::class]);
+                Route::post('/roles/create', 'RoleController@create');
+                Route::post('/roles/edit', 'RoleController@edit');
+                Route::post('/roles/delete', 'RoleController@delete');
+
+                Route::post('/sites/create', 'SiteController@create');
+                Route::post('/sites/register', 'SiteController@register')->middleware([EnsureToken::class]);
+            });
     });
