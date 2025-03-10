@@ -6,6 +6,7 @@
 /public/storage
 /storage/*.key
 /storage/*.txt
+/composer-home
 /vendor
 .env
 .env.backup
