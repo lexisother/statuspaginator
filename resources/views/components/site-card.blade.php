@@ -1,7 +1,7 @@
 @props(['site'])
 
 <div
-    class="{{ $site->criticalUpdate ? 'bg-cardbgcrit' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid"
+    class="{{ $site->criticalUpdate ? 'bg-cardbgcrit animate-siren' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid"
     x-data="{ overlayShow: false }"
 >
     {{-- overlay on hover --}}
