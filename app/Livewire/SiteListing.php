@@ -8,6 +8,7 @@ use Livewire\Component;
 class SiteListing extends Component
 {
     public string $search = '';
+    public bool $create;
 
     public function render()
     {
