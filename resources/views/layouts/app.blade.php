@@ -30,7 +30,7 @@
 
 <body>
     <div id="app" class="text-card font-mono flex flex-col min-h-screen {{ app()->isLocal() ? 'debug-screens' : '' }}">
-        <div class="bg-gradient-to-b from-gradt to-gradb fixed left-0 top-0 h-[120vh] md:h-[100vh] w-[100vw] -z-10"></div>
+        <div class="bg-linear-to-b from-gradt to-gradb fixed left-0 top-0 h-[120vh] md:h-[100vh] w-[100vw] -z-10"></div>
         <x-layout.header />
 
         @if (Config::get('app.debug') == 1)

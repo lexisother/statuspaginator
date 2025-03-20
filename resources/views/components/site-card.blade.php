@@ -8,7 +8,7 @@
     @if ($site->data)
         <a
             href="/sites/{{ $site->id }}"
-            class="flex items-center justify-center pb-12 row-start-1 col-start-1 z-10 -m-2 cursor-pointer transition-opacity bg-gradient-to-t from-gradt to-gradb"
+            class="flex items-center justify-center pb-12 row-start-1 col-start-1 z-10 -m-2 cursor-pointer transition-opacity bg-linear-to-t from-gradt to-gradb"
             @mouseover="overlayShow = true" @mouseleave="overlayShow = false"
             x-cloak
             :style="{ opacity: overlayShow ? 1 : 0 }"
@@ -18,7 +18,7 @@
     @endif
 
     <div class="flex flex-col row-start-1 col-start-1">
-        <div class="flex flex-row justify-between flex-grow" @mouseover="overlayShow = true" @mouseleave="overlayShow = false">
+        <div class="flex flex-row justify-between grow" @mouseover="overlayShow = true" @mouseleave="overlayShow = false">
             <div>
                 <div class="text-lg">{{ $site->name }}</div>
 

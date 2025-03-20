@@ -52,7 +52,7 @@
                     <div class="flex items-center justify-between space-x-4">
                         <h1 class="text-xl font-medium text-gray-800 ">Create user</h1>
 
-                        <button @click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
+                        <button @click="modelOpen = false" class="text-gray-600 focus:outline-hidden hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -65,19 +65,19 @@
                         <div class="flex flex-col gap-4">
                             <div>
                                 <label for="name" class="block text-sm text-gray-700 capitalize">Name</label>
-                                <input id="name" name="name" placeholder="Brik Brik" type="text" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <input id="name" name="name" placeholder="Brik Brik" type="text" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-hidden focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-40">
                             </div>
                             <div>
                                 <label for="email" class="block text-sm text-gray-700 capitalize">Email</label>
-                                <input id="email" name="email" placeholder="dev@brik.digital" type="email" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <input id="email" name="email" placeholder="dev@brik.digital" type="email" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-hidden focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-40">
                             </div>
                             <div>
                                 <label for="password" class="block text-sm text-gray-700 capitalize">Password</label>
-                                <input id="password" name="password" placeholder="brikbrik" type="password" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <input id="password" name="password" placeholder="brikbrik" type="password" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-hidden focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-40">
                             </div>
                             <div>
                                 <label for="role" class="block text-sm text-gray-700 capitalize">Role</label>
-                                <select id="role" name="role" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <select id="role" name="role" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-hidden focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-40">
                                     @foreach ($roles as $role => $_)
                                         <option value="{{ $role }}">{{ $role }}</option>
                                     @endforeach
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="flex justify-end mt-6">
-                            <input type="submit" value="Create user" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50" />
+                            <input type="submit" value="Create user" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-500 focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-50" />
                         </div>
                     </form>
                 </div>
