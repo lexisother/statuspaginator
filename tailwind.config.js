@@ -1,8 +1,18 @@
+import debug from 'tailwindcss-debug-screens';
+
 /** @type {import('tailwindcss').Config} */
 const config = {
     mode: process.env.NODE_ENV ? "jit" : undefined,
     content: ["./resources/**/*.blade.php", "./resources/**/*.js"],
     theme: {
+        screens: {
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px',
+            '2xl': '1536px',
+            '3xl': '2456px',
+        },
         extend: {
             colors: {
                 gradt: "#11151a",
@@ -54,7 +64,7 @@ const config = {
             }
         },
     },
-    plugins: [],
+    plugins: [debug()],
 };
 
 export default config;
