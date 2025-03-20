@@ -22,10 +22,11 @@ const config = {
             },
 
             animation: {
-                siren: 'siren 5s cubic-bezier(.4,0,.6,1) infinite'
+                sirenbg: 'sirenbg 5s cubic-bezier(.4,0,.6,1) infinite',
+                sirentext: 'sirentext 2.5s cubic-bezier(.4,0,.6,1) infinite'
             },
             keyframes: {
-                siren: {
+                sirenbg: {
                     '0%, 48%, to': {
                         // TODO: figure out way to not unset cardbgcrit if this isn't here
                         'background-color': '#471c1c',
@@ -34,6 +35,20 @@ const config = {
                     '16%': {
                         'background-color': '#5B2424',
                         'border-color': '#e92d2d'
+                    }
+                },
+                sirentext: {
+                    '0%, to': {
+                        filter: 'drop-shadow(0 0 .6px #800) drop-shadow(0 0 .3px #a51)',
+                        color: '#642'
+                    },
+                    '32%': {
+                        filter: 'drop-shadow(0 0 2.4px #f22) drop-shadow(0 0 1.2px #fb3)',
+                        color: '#fd6'
+                    },
+                    '96%': {
+                        filter: 'drop-shadow(0 0 .6px #800) drop-shadow(0 0 .3px #a51)',
+                        color: '#642'
                     }
                 }
             }

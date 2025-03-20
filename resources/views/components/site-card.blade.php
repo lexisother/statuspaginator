@@ -1,7 +1,7 @@
 @props(['site'])
 
 <div
-    class="{{ $site->criticalUpdate ? 'bg-cardbgcrit animate-siren' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid"
+    class="{{ $site->criticalUpdate ? 'bg-cardbgcrit animate-sirenbg' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid"
     x-data="{ overlayShow: false }"
 >
     {{-- overlay on hover --}}
@@ -37,11 +37,13 @@
         </div>
 
         <div class="bg-cardbgalt z-20 h-12 -m-2 text-sm flex items-center p-2">
-            @if ($site->data)
-                Craft {{ $site->data['craft']['version'] }} ({{ $site->data['craft']['edition'] }})
-            @else
-                NO DATA
-            @endif
+            <p class="{{ $site->criticalUpdate ? 'animate-sirentext' : '' }}">
+                @if ($site->data)
+                    Craft {{ $site->data['craft']['version'] }} ({{ $site->data['craft']['edition'] }})
+                @else
+                    NO DATA
+                @endif
+            </p>
             <div class="flex-1"></div>
             @if ($site->data)
                 <x-button :to="$site->data['meta']['cpurl']">Visit</x-button>
