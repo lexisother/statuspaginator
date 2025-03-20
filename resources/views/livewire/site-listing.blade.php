@@ -10,6 +10,12 @@
         @if ($create)
             <a href="/admin/sites/create" class="flex items-center bg-blurple px-6 hover:cursor-pointer mb-10">+</a>
         @endif
+        <select class="h-16 mb-10 p-4 bg-cardbg border border-black shadow-md" wire:model.live="constraint">
+            <option value="" selected>Craft version</option>
+            @foreach([3, 4, 5] as $version)
+                <option value="^{{ $version }}.0.0">Craft {{ $version }}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="grid grid-cols-1 gap-4 mx-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 {{ !$create ? '3xl:grid-cols-5' : '' }}">
