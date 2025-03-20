@@ -16,6 +16,9 @@ export default defineConfig({
         port: port,
         strictPort: true,
         origin: origin,
+        cors: {
+            origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(\.ddev\.site)(?::\d+)?$/,
+        },
     },
 });
 
