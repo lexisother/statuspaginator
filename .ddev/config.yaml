@@ -12,7 +12,18 @@ database:
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
-corepack_enable: false
+nodejs_version: 'lts'
+corepack_enable: true
+ddev_version_constraint: '>= 1.24.1'
+web_extra_exposed_ports:
+  - name: vite
+    container_port: 3000
+    http_port: 3001
+    https_port: 3000
+web_extra_daemons:
+  - name: laravel-queue
+    command: /var/www/html/artisan queue:work
+    directory: /var/www/html
 
 # Key features of DDEV's config.yaml:
 
