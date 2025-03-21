@@ -32,3 +32,5 @@
 .updateContainer a {
     @apply text-accent underline underline-offset-2 decoration-blue-400
 }
+
+[x-cloak] { display: none !important; }
