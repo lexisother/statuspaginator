@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <div id="app" class="text-card font-mono flex flex-col min-h-screen {{ app()->isLocal() ? 'debug-screens' : '' }}">
+    <div id="app" class="text-card {{--font-mono--}} font-hcsinclair flex flex-col min-h-screen {{ app()->isLocal() ? 'debug-screens' : '' }}">
         <div class="bg-linear-to-b from-gradt to-gradb fixed left-0 top-0 h-[120vh] md:h-[100vh] w-[100vw] -z-10"></div>
         <x-layout.header />
 

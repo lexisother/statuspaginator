@@ -1,6 +1,14 @@
 @import 'tailwindcss';
+@import './fonts.css';
+
+@import './utilities/button.css';
 
 @config '../../tailwind.config.js';
+
+@theme {
+    --background-image-stripes: url(../img/stripes.png);
+    --font-hcsinclair: "HC Sinclair";
+}
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,

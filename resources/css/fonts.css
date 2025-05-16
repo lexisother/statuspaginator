@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "HC Sinclair";
+    font-weight: 400;
+    src: url(../font/HCSinclair-Normal.woff) format("woff"),
+         url(../font/HCSinclair-Normal.woff2) format("woff2");
+}
+@font-face {
+    font-family: "HC Sinclair";
+    font-weight: 500;
+    src: url(../font/HCSinclair-Medium.woff) format("woff"),
+         url(../font/HCSinclair-Medium.woff2) format("woff2");
+}
+@font-face {
+    font-family: "HC Sinclair";
+    font-weight: 700;
+    src: url(../font/HCSinclair-Bold.woff) format("woff"),
+         url(../font/HCSinclair-Bold.woff2) format("woff2");
+}
+
+@font-face {
+    font-family: "Swiss Extended Bold";
+    font-weight: 400;
+    src: url(../font/Swiss-721-Extended-Bold.woff) format("woff"),
+         url(../font/Swiss-721-Extended-Bold.woff2) format("woff2");
+}
