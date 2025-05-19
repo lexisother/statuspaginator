@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
         "ohdearapp/ohdear-php-sdk": "*",
-        "spatie/laravel-permission": "^6.0"
+        "spatie/laravel-permission": "^6.0",
+        "unicon-rocks/unicon-laravel": "^0.4.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

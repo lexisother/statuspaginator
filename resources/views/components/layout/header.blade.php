@@ -7,11 +7,6 @@
     </div>
 
     <div class="w-1/3 justify-end flex flex-row mr-2 gap-2 [contain:layout_paint] will-change-transform backface-hidden">
-        <x-layout.wrap-button>
-            test 1
-        </x-layout.wrap-button>
-        <x-layout.wrap-button>
-            test 2
-        </x-layout.wrap-button>
+        <x-layout.wrap-button href="/login" top-text="ADMINISTRATIVE" main-text="DASHBOARD" icon="ri:login-circle-fill" />
     </div>
 </div>
