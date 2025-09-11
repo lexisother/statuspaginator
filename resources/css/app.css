@@ -7,7 +7,11 @@
 
 @theme {
     --background-image-stripes: url(../img/stripes.png);
+    --background-image-padstripes: url(../img/padstripes.svg);
+    --background-image-grid: url(../img/grid.png);
+
     --font-hcsinclair: "HC Sinclair";
+    --font-ttsquares: "TT Squares";
 }
 
 @utility content {
@@ -42,7 +46,7 @@
 }
 
 .updateContainer a {
-    @apply text-accent underline underline-offset-2 decoration-blue-400
+    /*@apply text-accent underline underline-offset-2 decoration-blue-400*/
 }
 
 [x-cloak] { display: none !important; }
