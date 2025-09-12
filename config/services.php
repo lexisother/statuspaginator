@@ -31,6 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'gitlab' => [
+        'webhook_secret' => env('GITLAB_WEBHOOK_SECRET')
+    ],
+
     'buddy' => [
         'workspace' => env('BUDDY_WORKSPACE'),
         'token' => env('BUDDY_TOKEN')
