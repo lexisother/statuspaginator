@@ -13,6 +13,7 @@ class OhDearProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register(): void
     {
+        return;
         $token = env('OHDEAR_TOKEN');
         $ohDear = new OhDearService($token);
         $this->app->instance(OhDearService::class, $ohDear);
@@ -25,6 +26,7 @@ class OhDearProvider extends ServiceProvider implements DeferrableProvider
      */
     public function provides(): array
     {
+        return [];
         return [OhDearService::class];
     }
 }
