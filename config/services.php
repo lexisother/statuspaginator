@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'buddy' => [
+        'workspace' => env('BUDDY_WORKSPACE'),
+        'token' => env('BUDDY_TOKEN')
+    ],
+
+    'ohdear' =>[
+        'token' => env('OHDEAR_TOKEN')
+    ],
+
 ];
