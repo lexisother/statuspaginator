@@ -16,8 +16,10 @@ use JsonException;
 
 class WebhookController extends Controller
 {
+    const MR_STATE_OPENED = 1;
     const MR_STATE_CLOSED = 2;
     const MR_STATE_MERGED = 3;
+    const MR_STATE_LOCKED = 4;
 
     /**
      * @throws BuddyResponseException
@@ -31,14 +33,21 @@ class WebhookController extends Controller
         if (Request::json('object_kind') !== 'merge_request')
             return $this->jsonError(['message' => "Can't handle non merge requests."], status: 501);
 
+        $source = Request::json('object_attributes.source_branch');
+        if (!$source)
+            return $this->jsonError(['message' => 'No source branch found.'], status: 422);
+        $runId = Str::match('/updates\/run-(\d+)/', $source);
+        if (!$runId)
+            return Response::json(['message' => "This merge request doesn't originate from an update branch: $source"], status: 422);
+
         $state = Request::json('object_attributes.state_id');
+        if ($state === self::MR_STATE_OPENED || $state === self::MR_STATE_LOCKED)
+            return $this->jsonError(['message' => 'Not handling MR opens and locks.'], status: 422, log: false);
         if ($state !== self::MR_STATE_CLOSED && $state !== self::MR_STATE_MERGED)
-            return $this->jsonError(['message' => 'The merge request state is not valid.'], status: 422);
+            return $this->jsonError(['message' => "The merge request state is not valid: $state"], status: 422);
 
         // mind you, this is extremely volatile. though, as long as this type of string is in the description
         // **at all times**, it'll be fine.
-        $source = Request::json('object_attributes.source_branch');
-        $runId = Str::match('/updates\/run-(\d+)/', $source);
         $desc = Request::json('object_attributes.description');
         $projectName = Str::match('/Buddy Project ID: (.*?)$/m', $desc);
 
@@ -76,12 +85,14 @@ class WebhookController extends Controller
         return Response::json(['message' => 'Acknowledged. Target structure has been annihilated.']);
     }
 
-    private function jsonError($data = [], $extraData = [], $status = 200): JsonResponse
+    private function jsonError($data = [], $extraData = [], $status = 200, $log = true): JsonResponse
     {
-        Log::error($data['message'], array_merge(
-            $extraData,
-            ['stack' => new \Exception($data['message'])]
-        ));
+        if ($log) {
+            Log::error($data['message'], array_merge(
+                $extraData,
+                ['stack' => new \Exception($data['message'])]
+            ));
+        }
 
         return Response::json($data, $status);
     }
