@@ -1,4 +1,5 @@
 <?php
+/** @noinspection UnusedFunctionResultInspection */
 
 use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\EnsureAuthed;
@@ -30,10 +31,11 @@ Route::middleware([EnsureAuthed::class, EnsureAdmin::class])
                 Route::redirect('/', '/admin/users');
 
                 Route::get('/users', 'AdminController@showUsers')->name('admin.users');
-                Route::get('/users/{id}', 'AdminController@showUser')->name('admin.users');
+                Route::get('/users/{id}', 'AdminController@showUser')->name('admin.user-details');
                 Route::get('/roles', 'AdminController@showRoles')->name('admin.roles');
 
                 Route::get('/sites', 'AdminController@showSites')->name('admin.sites');
+                Route::get('/sites/updates', 'AdminController@showUpdates')->name('admin.sites.updates');
                 Route::get('/sites/create', 'SiteController@showCreate')->name('admin.sites');
 
                 Route::post('/users/create', 'UserController@create');

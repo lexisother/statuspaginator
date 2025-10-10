@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\BuddyService;
-use Buddy\BuddyResponse;
+use App\Services\JiraService;
 use Buddy\Exceptions\BuddyResponseException;
+use DH\Adf\Node\Block\Document;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
@@ -25,7 +25,7 @@ class WebhookController extends Controller
      * @throws BuddyResponseException
      * @throws JsonException
      */
-    public function receiveGitlab(Request $request, BuddyService $buddy)
+    public function receiveGitlab(Request $request, BuddyService $buddy, JiraService $jira)
     {
         if (Request::header('x-gitlab-token', '') !== Config::get('services.gitlab.webhook_secret'))
             return $this->jsonError(['message' => 'The Maze is not meant for you.'], status: 401);
@@ -41,8 +41,10 @@ class WebhookController extends Controller
             return Response::json(['message' => "This merge request doesn't originate from an update branch: $source"], status: 422);
 
         $state = Request::json('object_attributes.state_id');
-        if ($state === self::MR_STATE_OPENED || $state === self::MR_STATE_LOCKED)
-            return $this->jsonError(['message' => 'Not handling MR opens and locks.'], status: 422, log: false);
+        if ($state === self::MR_STATE_LOCKED)
+            return $this->jsonError(['message' => 'Not handling MR locks.'], status: 422, log: false);
+        if ($state === self::MR_STATE_OPENED)
+            return $this->createJiraIssue($request, $jira);
         if ($state !== self::MR_STATE_CLOSED && $state !== self::MR_STATE_MERGED)
             return $this->jsonError(['message' => "The merge request state is not valid: $state"], status: 422);
 
@@ -62,7 +64,7 @@ class WebhookController extends Controller
 
         $res = $buddy->listSandboxes($projectName);
         if (!$res->isOk())
-            throw $this->getBuddyException($res);
+            throw $buddy->getBuddyException($res);
 
         $body = $res->getBody();
         if (!isset($body['sandboxes'])) // not sure how the response can be "ok" and still lack sandboxes but sure.
@@ -80,9 +82,38 @@ class WebhookController extends Controller
 
         $dres = $buddy->deleteSandbox($targetSandbox['id']);
         if (!$dres->isOk() && $res->getStatusCode() === 204)
-            throw $this->getBuddyException($dres);
+            throw $buddy->getBuddyException($dres);
 
         return Response::json(['message' => 'Acknowledged. Target structure has been annihilated.']);
+    }
+
+    private function createJiraIssue(Request $request, JiraService $jira)
+    {
+        $repoName = Request::json('repository.name');
+        $mrDesc = Request::json('object_attributes.description');
+        if (!$repoName)
+            return $this->jsonError(['message' => 'No repository name found.'], status: 422);
+
+        $diffList = Str::match('/```\n(.*?)```/s', $mrDesc);
+        $stagingLink = Str::match('/There is a staging environment available to test this MR here: (.*?)\n/s', $mrDesc);
+
+        $jira
+            ->setProjectKey(Config::get('services.jira.projectKey'))
+            ->setSummary("Update - $repoName")
+            ->createIssue(
+                (new Document())
+                    ->paragraph()
+                        ->text('There is a staging environment available to test this MR ')
+                        ->link('here', $stagingLink)
+                        ->text('.')
+                    ->end()
+                    ->codeblock('arduino')
+                        ->text($diffList)
+                    ->end()
+            )
+        ;
+
+        return Response::json(['message' => 'Thy call hath been heeded.']);
     }
 
     private function jsonError($data = [], $extraData = [], $status = 200, $log = true): JsonResponse
@@ -95,14 +126,5 @@ class WebhookController extends Controller
         }
 
         return Response::json($data, $status);
-    }
-
-    private function getBuddyException(BuddyResponse $res)
-    {
-        return new BuddyResponseException(
-            $res->getStatusCode(),
-            $res->getHeaders(),
-            json_encode($res->getBody(), JSON_THROW_ON_ERROR)
-        );
     }
 }

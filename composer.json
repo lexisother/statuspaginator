@@ -11,9 +11,11 @@
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
+        "lesstif/jira-cloud-restapi": "^1.9",
         "lexisother/buddy-works-php-api": "^1.5.0",
         "livewire/livewire": "^3.4",
         "ohdearapp/ohdear-php-sdk": "*",
+        "spatie/laravel-data": "^4.17",
         "spatie/laravel-permission": "^6.0"
     },
     "require-dev": {

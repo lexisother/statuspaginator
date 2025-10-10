@@ -37,11 +37,18 @@ return [
 
     'buddy' => [
         'workspace' => env('BUDDY_WORKSPACE'),
-        'token' => env('BUDDY_TOKEN')
+        'token' => env('BUDDY_TOKEN'),
     ],
 
-    'ohdear' =>[
-        'token' => env('OHDEAR_TOKEN')
+    'ohdear' => [
+        'token' => env('OHDEAR_TOKEN'),
     ],
+
+    'jira' => [
+        'host' => env('JIRAAPI_V3_HOST'),
+        'user' =>  env('JIRAAPI_V3_USER'),
+        'token' =>  env('JIRAAPI_V3_PERSONAL_ACCESS_TOKEN'),
+        'projectKey' => env('JIRAAPI_V3_PROJECT_KEY'),
+    ]
 
 ];

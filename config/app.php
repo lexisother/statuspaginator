@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 //        App\Providers\OhDearProvider::class,
         App\Providers\BuddyProvider::class,
+        App\Providers\JiraServiceProvider::class,
     ])->toArray(),
 
     /*

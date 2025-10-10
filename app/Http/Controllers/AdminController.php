@@ -41,4 +41,8 @@ class AdminController extends \Illuminate\Routing\Controller
     public function showSites() {
         return view('admin.sites');
     }
+
+    public function showUpdates() {
+        return view('admin.sites.updates');
+    }
 }
