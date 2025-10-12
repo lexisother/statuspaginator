@@ -5,7 +5,6 @@ namespace App\Services;
 use App\DTO\Pipeline;
 use App\DTO\Project;
 use App\DTO\Updateable;
-use BadMethodCallException;
 use Buddy\Buddy;
 use Buddy\BuddyResponse;
 use Buddy\Exceptions\BuddyResponseException;
@@ -21,7 +20,7 @@ class BuddyService
     public function __construct(string $workspace = null, string $token = null)
     {
         if (!$token || !$workspace)
-            throw new BadMethodCallException('Token or workspace are missing.');
+            return;
 
         $this->workspace = $workspace;
         $this->client = new Buddy([
