@@ -39,6 +39,7 @@ class WebhookController extends Controller
                 ['provided_type' => Request::json('object_kind')]
             );
 
+        $project = Request::json('project.name') ?? 'Unknown';
         $source = Request::json('object_attributes.source_branch');
         if (!$source)
             return $this->jsonError(['message' => 'No source branch found.']);
@@ -47,7 +48,10 @@ class WebhookController extends Controller
         if (!$runId)
             return $this->jsonError(
                 ['message' => "This merge request doesn't originate from an update branch"],
-                ['source_branch' => $source]
+                [
+                    'project' => $project,
+                    'source_branch' => $source
+                ]
             );
 
         $state = Request::json('object_attributes.state_id');
@@ -58,7 +62,10 @@ class WebhookController extends Controller
         if ($state !== self::MR_STATE_CLOSED && $state !== self::MR_STATE_MERGED)
             return $this->jsonError(
                 ['message' => "The merge request state is not valid"],
-                ['mr_state' => $state]
+                [
+                    'project' => $project,
+                    'mr_state' => $state
+                ]
             );
 
         // mind you, this is extremely volatile. though, as long as this type of string is in the description
@@ -66,9 +73,9 @@ class WebhookController extends Controller
         $desc = Request::json('object_attributes.description');
         $projectName = Str::match('/Buddy Project ID: (.*?)$/m', $desc);
 
-        if (!$runId || !$projectName)
+        if (!$projectName)
             return $this->jsonError(
-                ['message' => 'No runId or projectName found.'],
+                ['message' => 'No projectName found.'],
                 [
                     'source_branch' => $source,
                     'desc' => $desc
