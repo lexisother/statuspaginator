@@ -94,7 +94,7 @@ class BuddyService
             'to_revision' => [
                 'revision' => 'HEAD'
             ],
-            'priority' => 'HIGH',
+            'priority' => 'LOW',
         ], $this->workspace, $projectName, $pipelineId);
     }
 
