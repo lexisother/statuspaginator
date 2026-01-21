@@ -15,7 +15,12 @@
                     value="{{ $updateable->project->name }}"
                     wire:model="checkedUpdateables"
                 />
-                <label for="{{ $updateable->project->name }}">{{ $updateable->project->display_name }}</label>
+                <label for="{{ $updateable->project->name }}">
+                    {{ $updateable->project->display_name }}
+                    @if($updateable->wasRanRecently())
+                        <span title="Recently ran" class="text-gray-600">(!)</span>
+                    @endif
+                </label>
             </div>
         @endforeach
     </div>

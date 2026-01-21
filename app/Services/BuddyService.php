@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\Execution;
 use App\DTO\Pipeline;
 use App\DTO\Project;
 use App\DTO\Updateable;
@@ -10,6 +11,7 @@ use Buddy\BuddyResponse;
 use Buddy\Exceptions\BuddyResponseException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use JsonException;
 
 class BuddyService
@@ -98,6 +100,17 @@ class BuddyService
         ], $this->workspace, $projectName, $pipelineId);
     }
 
+    public function listPipelineRuns(string $projectName, int $pipelineId)
+    {
+        $executions = $this->client->getApiExecutions();
+        $ret = $executions->getExecutions($this->workspace, $projectName, $pipelineId);
+        if (!$ret->isOk())
+            throw $this->getBuddyException($ret);
+
+        return collect($ret->getBody()['executions'])
+            ->map(fn ($execution) => Execution::from($execution));
+    }
+
     public function listUpdateableProjects()
     {
         return Cache::remember('updateableProjects', now()->addWeek(), function () {
@@ -105,14 +118,18 @@ class BuddyService
             $ret = collect();
 
             foreach ($this->listProjects() as $project) {
-                $pipelines = $this->listProjectPipelines($project->name)
-                    ->filter(fn (Pipeline $pipeline) =>
+                $pipeline = $this->listProjectPipelines($project->name)
+                    ->first(fn (Pipeline $pipeline) =>
                         $pipeline->name === 'Run Craft updates' ||
                         $pipeline->identifier === 'run-craft-updates'
                     );
+                if (!$pipeline) continue;
 
-                if ($pipelines->count())
-                    $ret->push(new Updateable($project, $pipelines));
+                $earliest = $this->listPipelineRuns($project->name, $pipeline->id)
+                    ->sortBy(fn (Execution $e) => $e->finish_date, descending: true)
+                    ->first();
+
+                $ret->push(new Updateable($project, $pipeline, $earliest ?? false));
             }
 
             return $ret;
