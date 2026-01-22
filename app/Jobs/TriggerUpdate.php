@@ -27,7 +27,7 @@ class TriggerUpdate implements ShouldQueue
     public function handle(BuddyService $buddy): void
     {
         $project = $this->updateable->project;
-        $updatePipeline = $this->updateable->pipelines->first();
+        $updatePipeline = $this->updateable->pipeline;
         Log::info("Triggering update for $project->name (pipeline ID: $updatePipeline->id)");
 
         // TODO: Actual error handling :clueless:
