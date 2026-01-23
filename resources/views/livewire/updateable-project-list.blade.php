@@ -1,10 +1,18 @@
 <div>
-    <button
-        class="flex items-center justify-center space-x-2 bg-blurple py-1 px-6 hover:cursor-pointer"
-        wire:click="toggleAll"
-    >
-        Toggle all
-    </button>
+    <div class="flex justify-between">
+        <button
+            class="flex items-center justify-center space-x-2 bg-blurple py-1 px-6 hover:cursor-pointer"
+            wire:click="toggleAll"
+        >
+            Toggle all
+        </button>
+        <button
+            class="flex items-center justify-center space-x-2 bg-red-800 py-1 px-6 hover:cursor-pointer"
+            wire:click="clearCache"
+        >
+            Clear cache
+        </button>
+    </div>
 
     <div class="grid grid-cols-2 my-4">
         @foreach($updateables as $updateable)
@@ -27,13 +35,13 @@
 
     <div class="flex flex-row gap-2">
         <button
-            class="flex flex-grow items-center justify-center space-x-2 bg-blurple py-1 px-6 hover:cursor-pointer mb-4"
+            class="flex flex-grow items-center justify-center space-x-2 bg-blurple py-1 px-6 hover:cursor-pointer"
             wire:click="trigger('tonight')"
         >
             Tonight
         </button>
         <button
-            class="flex flex-grow items-center justify-center space-x-2 bg-red-800 py-1 px-6 hover:cursor-pointer mb-4"
+            class="flex flex-grow items-center justify-center space-x-2 bg-red-800 py-1 px-6 hover:cursor-pointer"
             wire:click="trigger('now')"
         >
             Now

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\DTO\Updateable;
 use App\Jobs\TriggerUpdate;
 use App\Services\BuddyService;
+use Cache;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Livewire\Attributes\Lazy;
@@ -44,6 +45,12 @@ class UpdateableProjectList extends Component
 
         $this->checkedUpdateables = $this->updateables
             ->map(fn (Updateable $u) => $u->project->name)->toArray();
+    }
+
+    public function clearCache(BuddyService $buddy)
+    {
+        Cache::forget('updateableProjects');
+        $this->updateables = $buddy->listUpdateableProjects();
     }
 
     public function mount(BuddyService $buddy): void
