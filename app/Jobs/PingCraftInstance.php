@@ -30,7 +30,7 @@ class PingCraftInstance implements ShouldQueue
         $site = $this->site;
 
         try {
-            $req = Http::post($site->url . '/actions/statuspaginator/status', [
+            $req = Http::post(rtrim($site->url, '/') . '/actions/statuspaginator/status', [
                 'token' => $site->token
             ]);
             File::put(storage_path() . "/$site->id.txt", $req->body());
