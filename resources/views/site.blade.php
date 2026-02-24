@@ -6,7 +6,9 @@
         <div class="text-center flex flex-col gap-4 justify-between items-center lg:flex-row lg:gap-0">
             <div class="flex flex-row gap-4">
                 <h1 class="text-lg font-light self-center md:text-5xl">{{ $site->name }}</h1>
-                <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
+                @if($site->data['meta']['rebrand']['icon'])
+                    <img src="{{ $site->data['meta']['rebrand']['icon'] }}" class="w-12" />
+                @endif
             </div>
             <div class="flex flex-col gap-2">
                 <x-button :to="$site->data['meta']['cpurl']" newtab>Control Panel</x-button>
