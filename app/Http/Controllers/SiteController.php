@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
 class SiteController extends \Illuminate\Routing\Controller
@@ -35,6 +36,11 @@ class SiteController extends \Illuminate\Routing\Controller
         $res = Http::post(rtrim($site->url, '/') . '/actions/statuspaginator/register', [
             'token' => $request->get('token')
         ])->json();
+
+        if (empty($res)) {
+            return Redirect::route('admin.sites')
+                ->with(['error' => 'No data returned from register endpoint']);
+        }
 
         // HACK, I guess? For some reason inlining `name` and `timezone` while they're non-nullable breaks things.
         // Very weird.

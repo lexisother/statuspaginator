@@ -36,7 +36,7 @@ Route::middleware([EnsureAuthed::class, EnsureAdmin::class])
 
                 Route::get('/sites', 'AdminController@showSites')->name('admin.sites');
                 Route::get('/sites/updates', 'AdminController@showUpdates')->name('admin.sites.updates');
-                Route::get('/sites/create', 'SiteController@showCreate')->name('admin.sites');
+                Route::get('/sites/create', 'SiteController@showCreate')->name('admin.sites.create');
 
                 Route::post('/users/create', 'UserController@create');
                 Route::patch('/users/edit/{id}', 'UserController@edit');
