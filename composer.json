@@ -73,7 +73,8 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/lexisother/buddy-works-php-api"
+            "url": "https://github.com/lexisother/buddy-works-php-api",
+            "no-api": true
         }
     ]
 }
