@@ -21,7 +21,7 @@ class Site extends Model
     ];
 
     public function isStaging() {
-        return $this->type === SiteType::STAGING->value;
+        return $this->type === SiteType::Staging->value;
     }
 
     public function setUpdates() {

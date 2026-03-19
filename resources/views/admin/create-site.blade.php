@@ -19,8 +19,18 @@
                 <label for="url">Url</label>
                 <input
                     type="text"
+                    id="url"
                     name="url"
                     class="h-14 p-4 flex-1 md:flex-none bg-cardbg border border-black shadow-md" />
+            </div>
+
+            <div class="flex flex-row items-center gap-2">
+                <label for="type">Type</label>
+                <select id="type" name="type" class="p-2 bg-cardbg border border-black shadow-md">
+                    @foreach(\App\Enums\SiteType::cases() as $type)
+                        <option value="{{ $type->value }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <input type="submit" value="Create" class="flex items-center justify-center space-x-2 bg-blurple py-1 px-6 hover:cursor-pointer mb-4" />

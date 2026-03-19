@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\SiteType;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -15,13 +16,14 @@ class SiteController extends \Illuminate\Routing\Controller
     }
 
     public function create(Request $request) {
-        $url = $request->get('url');
+        $url = $request->input('url');
+        $type = $request->input('type');
         $token = Str::random(180);
 
         $site = Site::where('url', $url)->first();
         if ($site) return view('admin.create-site', ['exists' => true]);
 
-        $site = new Site(['url' => $url]);
+        $site = new Site(['url' => $url, 'type' => SiteType::from($type)]);
         $site->token = $token;
         $site->save();
 
