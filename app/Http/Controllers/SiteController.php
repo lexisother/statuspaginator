@@ -35,7 +35,7 @@ class SiteController extends \Illuminate\Routing\Controller
             'token' => $request->get('token'),
         ])->first();
 
-        $res = Http::post(rtrim($site->url, '/') . '/actions/statuspaginator/register', [
+        $res = Http::post(rtrim($site->url, '/') . '/actions/statuspaginator/register/', [
             'token' => $request->get('token')
         ])->json();
 
