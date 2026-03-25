@@ -29,7 +29,9 @@ class Kernel extends ConsoleKernel
 
     private function scheduleCraftJobs(Schedule $schedule)
     {
-        $sites = Site::all();
+        // If the name is empty, the site hasn't been registered yet.
+        // Prevents a premature token mismatch response being saved.
+        $sites = Site::all()->filter(fn (Site $s) => !empty($s->name));
 
         $sites->each(function ($site) use ($schedule) {
             $schedule->job(new PingCraftInstance($site))->everyMinute();
