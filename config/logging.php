@@ -56,7 +56,7 @@ return [
             'driver' => 'stack',
             'channels' => [
                 'daily',
-//                ...(env('LOG_SLACK_WEBHOOK_URL', '') !== '' ? ['slack'] : [])
+                ...(env('LOG_SLACK_WEBHOOK_URL', '') !== '' ? ['slack'] : [])
             ],
             'ignore_exceptions' => false,
         ],
