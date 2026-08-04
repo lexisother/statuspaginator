@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use JsonException;
+use Symfony\Component\Yaml\Yaml;
 
 class BuddyService
 {
@@ -126,11 +127,19 @@ class BuddyService
             throw new Exception("No base pipeline found to propagate!");
 
         $res = $pipelines->exportPipeline($this->workspace, $baseUpdateable->project->name, $baseUpdateable->pipeline->id);
-        $yml = base64_decode($res->getBody()['yaml']);
+        $baseYml = Yaml::parse(base64_decode($res->getBody()['yaml']));
+        if (!isset($baseYml[0])) throw new Exception("Base pipeline failed to parse");
 
-        $updateables->each(function (Updateable $updateable) use ($pipelines, $yml) {
+        $updateables->each(function (Updateable $updateable) use ($pipelines, $baseYml) {
+            $pipelineRes = $pipelines->exportPipeline($this->workspace, $updateable->project->name, $updateable->pipeline->id);
+            $targetYml = Yaml::parse(base64_decode($pipelineRes->getBody()['yaml']));
+            if (!isset($targetYml[0])) throw new Exception($updateable->project->display_name . " YAML failed to parse");
+
+            $targetYml[0]['actions'] = $baseYml[0]['actions'];
+            $targetYml = Yaml::dump($targetYml);
+
             $res = $pipelines->editPipelineWithYaml(
-                ['yaml' => base64_encode($yml)],
+                ['yaml' => base64_encode($targetYml)],
                 $this->workspace,
                 $updateable->project->name,
                 $updateable->pipeline->id
