@@ -12,7 +12,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "lesstif/jira-cloud-restapi": "^1.9",
-        "lexisother/buddy-works-php-api": "^1.5.0",
+        "lexisother/buddy-works-php-api": "^1.6",
         "livewire/livewire": "^3.4",
         "ohdearapp/ohdear-php-sdk": "*",
         "spatie/laravel-data": "^4.17",

@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Jobs\PingCraftInstance;
 use App\Models\Site;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Queue;
 
 class CreateSiteJobs extends Command
 {

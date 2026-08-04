@@ -9,6 +9,7 @@ use App\DTO\Updateable;
 use Buddy\Buddy;
 use Buddy\BuddyResponse;
 use Buddy\Exceptions\BuddyResponseException;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -109,6 +110,36 @@ class BuddyService
 
         return collect($ret->getBody()['executions'])
             ->map(fn ($execution) => Execution::from($execution));
+    }
+
+    public function propagateBasePipeline()
+    {
+        $pipelines = $this->client->getApiPipelines();
+
+        $updateables = $this->listUpdateableProjects();
+        $baseUpdateable = $updateables->first(fn (Updateable $updateable) =>
+            $updateable->project->name === 'regionale-omroepen-craft'
+            && $updateable->pipeline->identifier === 'run-craft-updates'
+        );
+
+        if ($baseUpdateable === null)
+            throw new Exception("No base pipeline found to propagate!");
+
+        $res = $pipelines->exportPipeline($this->workspace, $baseUpdateable->project->name, $baseUpdateable->pipeline->id);
+        $yml = base64_decode($res->getBody()['yaml']);
+
+        $updateables->each(function (Updateable $updateable) use ($pipelines, $yml) {
+            $res = $pipelines->editPipelineWithYaml(
+                ['yaml' => base64_encode($yml)],
+                $this->workspace,
+                $updateable->project->name,
+                $updateable->pipeline->id
+            );
+
+            if (!$res->isOk()) {
+                throw $this->getBuddyException($res);
+            }
+        });
     }
 
     public function listUpdateableProjects()

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ee132119d966bb6672233b1205e8b87",
+    "content-hash": "1e742e8df2ba33d570c2c911e33874bf",
     "packages": [
         {
             "name": "brick/math",
@@ -2334,16 +2334,16 @@
         },
         {
             "name": "lexisother/buddy-works-php-api",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexisother/buddy-works-php-api",
-                "reference": "86ee853eb27535c56bd248a8657846753246ac70"
+                "reference": "f5a08bad9f3b73ddb7c41ebad1d8357248d2f0e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexisother/buddy-works-php-api/zipball/86ee853eb27535c56bd248a8657846753246ac70",
-                "reference": "86ee853eb27535c56bd248a8657846753246ac70",
+                "url": "https://api.github.com/repos/lexisother/buddy-works-php-api/zipball/f5a08bad9f3b73ddb7c41ebad1d8357248d2f0e8",
+                "reference": "f5a08bad9f3b73ddb7c41ebad1d8357248d2f0e8",
                 "shasum": ""
             },
             "require": {
@@ -2423,7 +2423,7 @@
                 "continuous integration",
                 "sdk"
             ],
-            "time": "2025-09-11T13:45:50+00:00"
+            "time": "2026-08-04T09:43:11+00:00"
         },
         {
             "name": "livewire/livewire",
