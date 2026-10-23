@@ -6,27 +6,27 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "composer/semver": "^3.4",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^13.0",
-        "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^3.0",
+        "composer/semver": "3.5.2",
+        "guzzlehttp/guzzle": "7.16.0",
+        "laravel/framework": "13.38.0",
+        "laravel/sanctum": "4.3.3",
+        "laravel/tinker": "3.0.2",
         "lesstif/jira-cloud-restapi": "^1.9",
         "lexisother/buddy-works-php-api": "^1.6",
-        "livewire/livewire": "^3.4",
-        "ohdearapp/ohdear-php-sdk": "*",
-        "spatie/laravel-data": "^4.17",
+        "livewire/livewire": "3.8.11",
+        "ohdearapp/ohdear-php-sdk": "4.7.0",
+        "spatie/laravel-data": "4.23.0",
         "spatie/laravel-permission": "^6.0",
-        "symfony/yaml": "^7.4"
+        "symfony/yaml": "7.4.21"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.25",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^11.0",
-        "spatie/laravel-ignition": "^2.0"
+        "laravel/pint": "1.32.1",
+        "laravel/sail": "1.69.0",
+        "mockery/mockery": "1.6.15",
+        "nunomaduro/collision": "8.9.5",
+        "phpunit/phpunit": "11.5.57",
+        "spatie/laravel-ignition": "2.12.1"
     },
     "autoload": {
         "files": ["app/helpers.php"],
