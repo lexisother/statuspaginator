@@ -57,7 +57,11 @@
                     <div class="px-4 py-2">
                         <div class="flex flex-row items-center gap-2">
                             <p>Is critical:</p>
-                            <input type="checkbox" wire:model.live="isCritical" class="" />
+                            <input type="checkbox" wire:model.live="isCritical" />
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <p>Is in dev mode:</p>
+                            <input type="checkbox" wire:model.live="isDev" />
                         </div>
                     </div>
                 </div>

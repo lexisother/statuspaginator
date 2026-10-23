@@ -34,7 +34,7 @@ class PingCraftInstance implements ShouldQueue
                 'token' => $site->token
             ]);
             File::put(storage_path() . "/$site->id.txt", $req->body());
-            if ($req->status() !== 200) throw new \Exception("Status code was {$req->status()}\n  Body: {$req->body()}");
+            if ($req->status() !== 200) throw new \Exception("Status code for $site->id was {$req->status()}\n  Body: {$req->body()}");
             $res = $req->json();
             if ($res === null) throw new \Exception("res for $site->id was null.\n  Status: {$req->status()}\n  Body: {$req->body()}");
         } catch(\Exception $e) {

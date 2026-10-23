@@ -2,7 +2,7 @@
 
 
 <div
-    class="{{ $site->criticalUpdate ? 'bg-cardbgcrit animate-sirenbg' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid"
+    class="{{ $site->criticalUpdate || $site->isDev() ? 'bg-cardbgcrit animate-sirenbg' : 'bg-cardbg' }} border-black border shadow-md p-2 min-h-[9.5rem] grid"
     x-data="{ overlayShow: false }"
 >
     {{-- overlay on hover --}}
@@ -23,11 +23,14 @@
             <div>
                 <div class="text-lg">{{ $site->name }}</div>
 
-                @if ($site->updateAvailable)
-                    <div class="text-sm text-yellow-300">Update available!</div>
+                @if ($site->isDev())
+                    <div class="text-sm text-red-500">Site is in dev mode!</div>
                 @endif
                 @if ($site->criticalUpdate)
                     <div class="text-sm text-red-500">Critical update available!</div>
+                @endif
+                @if (!$site->criticalUpdate && $site->updateAvailable)
+                    <div class="text-sm text-yellow-300">Update available!</div>
                 @endif
             </div>
             @if ($site->data && $site->data['meta']['rebrand']['icon'])
@@ -41,7 +44,6 @@
             class="bg-cardbgalt z-20 h-12 -m-2 text-sm flex items-center p-2"
             @if($site->isStaging() && $site->criticalUpdate) style="background-image: {{ staging_crit_bg() }};"
             @elseif($site->isStaging()) style="background-image: {{ staging_bg() }};" @endif
-
         >
             <p class="{{ $site->criticalUpdate ? 'animate-sirentext' : '' }}">
                 @if ($site->isStaging()) 🚧 @endif

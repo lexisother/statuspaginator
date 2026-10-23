@@ -13,6 +13,7 @@ class SiteListing extends Component
     public string $constraint = '';
     public array $plugins = [];
     public bool $isCritical = false;
+    public bool $isDev = false;
 
     public bool $create;
 
@@ -30,6 +31,9 @@ class SiteListing extends Component
             });
         }
 
+        if ($this->isDev) {
+            $sites = $sites->filter(fn (Site $site) => $site->isDev());
+        }
         if ($this->isCritical) {
             $sites = $sites->filter(fn (Site $site) => $site->criticalUpdate);
         }
@@ -40,6 +44,8 @@ class SiteListing extends Component
                 return !empty(array_intersect($handles, $this->plugins));
             });
         }
+
+        $sites = $sites->sortBy(fn (Site $site) => !$site->criticalUpdate && !$site->isDev());
 
         return view('livewire.site-listing', [
             'sites' => $sites

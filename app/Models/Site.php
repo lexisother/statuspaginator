@@ -24,6 +24,11 @@ class Site extends Model
         return $this->type === SiteType::Staging->value;
     }
 
+    public function isDev() {
+        return (isset($this->data['meta']['environment']) && $this->data['meta']['environment'] === 'dev')
+            || (isset($this->data['meta']['isDev']) && $this->data['meta']['isDev']);
+    }
+
     public function setUpdates() {
         if (!$this->data) return;
         if ($this->data['craft']['updates']['total'] > 0) $this->updateAvailable = true;
